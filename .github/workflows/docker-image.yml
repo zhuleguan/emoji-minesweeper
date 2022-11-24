@@ -25,6 +25,6 @@ jobs:
       - name: Push to Ali Docker Repository
         run: |
           docker login -u ${{ secrets.ALI_DOCKER_HUB_USN }} -p ${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
-          docker tag emoji-image ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}:${{ steps.get_commit_id.outputs.short_commit_id }}
-          docker push ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}:${{ steps.get_commit_id.outputs.short_commit_id }}
+          docker tag emoji-image ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}:latest
+          docker push ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}:latest
 
