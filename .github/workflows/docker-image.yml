@@ -21,15 +21,14 @@ jobs:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
-      # 将GTIHUB的信息都打印出来，后面的脚本可以使用这些信息，例如后面的镜像TAG用的就是这里面的commitid
         run: echo "Hello ${{ github.event.commits[0].id }}"
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag emoji-image:latest
       - name: Push to Ali Docker Repository
         run: |
-          echo ${commit_id}
+          CommitID="${{ github.event.commits[0].id }}"
           docker login -u ${{ secrets.ALI_DOCKER_HUB_USN }} -p ${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
-          docker tag emoji-image:latest ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}:${{ github.event.commits[0].id }}
-          docker push ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}:${{ github.event.commits[0].id }}
+          docker tag emoji-image:latest ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}:"${CommitID:0:7}"
+          docker push ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}:"${CommitID:0:7}"
       
 
