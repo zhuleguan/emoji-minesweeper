@@ -8,10 +8,10 @@ on:
     #paths:
      # - 'docker/**'
 
-defaults:
-  run:
-    shell: bash
-    working-directory: './docker'
+#defaults:
+#  run:
+#    shell: bash
+#    working-directory: './docker'
 
 jobs:
   build:
