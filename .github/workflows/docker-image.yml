@@ -1,4 +1,3 @@
-
 name: Docker Image CI
 # 触发条件：当master branch触发push（push，merge Pull Request）时，弱docker文件夹下的文件有更新，则触发。
 on:
@@ -23,10 +22,9 @@ jobs:
         run: docker build . --file Dockerfile --tag emoji-image:latest
       - name: Get commit id
         id: get_commit_id
-        uses: ./
       - name: Push to Ali Docker Repository
         run: |
-          echo ${{ steps.get_commit_id.outputs.short_commit_id }}
+          echo ${commit_id}
           docker login -u ${{ secrets.ALI_DOCKER_HUB_USN }} -p ${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
           docker tag emoji-image:latest ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}:${{ steps.get_commit_id.outputs.short_commit_id }}
           docker push ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}:${{ steps.get_commit_id.outputs.short_commit_id }}
