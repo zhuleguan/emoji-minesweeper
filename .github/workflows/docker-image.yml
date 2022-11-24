@@ -20,11 +20,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+        run: docker build . --file Dockerfile --tag emoji-image:$(date +%s)
       
       - name: Push to Ali Docker Repository
         run: |
           docker login -u ${{ secrets.ALI_DOCKER_HUB_USN }} -p ${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
-          docker tag locale ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/username/repository:tag
-          docker push ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/username/repository:tag
+          docker tag emoji-image:$(date +%s) ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/zhuleguan/github-test:$(date +%s)
+          docker push ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/zhuleguan/github-test:$(date +%s)
 
