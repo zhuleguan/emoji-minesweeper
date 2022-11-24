@@ -19,6 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: echo $commit_id
+        run: echo ${COMMIT_ID}
       
 
