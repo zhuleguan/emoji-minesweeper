@@ -20,11 +20,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag emoji-image:${{ steps.get_commit_id.outputs.short_commit_id }}
+        run: docker build . --file Dockerfile --tag emoji-image
       
       - name: Push to Ali Docker Repository
         run: |
           docker login -u ${{ secrets.ALI_DOCKER_HUB_USN }} -p ${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
-          docker tag emoji-image:${{ steps.get_commit_id.outputs.short_commit_id }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/zhuleguan/github-test:${{ steps.get_commit_id.outputs.short_commit_id }}
+          docker tag emoji-image ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/zhuleguan/github-test:${{ steps.get_commit_id.outputs.short_commit_id }}
           docker push ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/zhuleguan/github-test:${{ steps.get_commit_id.outputs.short_commit_id }}
 
