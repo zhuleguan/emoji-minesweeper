@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       #- name: Build the Docker image
-       # run: "${{ github.event.commits[0].id }}"
+       # run: "${{ github.event.commits[0] }}"
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
