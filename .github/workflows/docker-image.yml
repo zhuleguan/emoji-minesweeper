@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag emoji-image:$(date +%s)
+        run: docker build . --file Dockerfile --tag emoji-image
       
       - name: Push to Ali Docker Repository
         run: |
