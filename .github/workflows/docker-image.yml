@@ -21,7 +21,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag emoji-image:latest
-      
+      - name: Get commit id
+        id: get_commit_id
+        uses: ./
       - name: Push to Ali Docker Repository
         run: |
           echo ${{ steps.get_commit_id.outputs.short_commit_id }}
